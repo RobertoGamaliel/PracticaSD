@@ -7,6 +7,18 @@ const userSchema = new Schema({
         trim: true,
         unique: true
     },
+    comentario:{
+        type:String,
+        required: false
+    },
+    sexo:{
+        
+    },
+    contrasena:{
+        type:String,
+        required:false,
+        unique:false
+    }
 }, {
     timestamps: true//fecha de creacion y fecha de modificacion
 });

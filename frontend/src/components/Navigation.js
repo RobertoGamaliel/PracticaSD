@@ -10,7 +10,7 @@ export default class Navigation extends Component {
   conteo=0;
 
   async componentDidMount() {
-    if(this.conteo==0){
+    if(this.conteo===0){
       this.conteo=this.conteo+1;
       this.usuarios();
     }
