@@ -12,6 +12,8 @@ const userSchema = new Schema({
         required: false
     },
     sexo:{
+        type:Number,
+        required:true
         
     },
     contrasena:{
@@ -22,5 +24,6 @@ const userSchema = new Schema({
 }, {
     timestamps: true//fecha de creacion y fecha de modificacion
 });
+
 
 module.exports = model('User', userSchema);

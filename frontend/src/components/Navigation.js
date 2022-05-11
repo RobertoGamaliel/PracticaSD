@@ -4,24 +4,23 @@ import axios from 'axios'
 
 export default class Navigation extends Component {
   state = {
-    ruta:"/create"
+    ruta:"/create",
+    obtenerUsuario:0,
+    componente:0,
+    conteo:0
   }
 
-  conteo=0;
+  
 
   async componentDidMount() {
-    if(this.conteo===0){
-      this.conteo=this.conteo+1;
       this.usuarios();
-    }
-     
   }
 
   async usuarios(){
     const res = await axios.get('http://localhost:4000/api/users');
     if(res.data.length>0){
       this.setState({
-        ruta: "/create",  
+        ruta: "/create"
     });
     }else{
       this.setState({
@@ -44,13 +43,13 @@ export default class Navigation extends Component {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item active">
-                        <Link className="nav-link fs-5" onClick={this.usuarios()} to="/"> Todas las notas </Link>
+                        <Link className="nav-link fs-5" onClick={()=>this.usuarios()} to="/"> Todas las notas </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link fs-5" onClick={this.usuarios()} to={this.state.ruta}> Crear una nota </Link>
+                        <Link className="nav-link fs-5" onClick={()=>this.usuarios()} to={this.state.ruta}> Crear una nota </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link fs-5" onClick={this.usuarios()} to="/user"> Crear usuario </Link>
+                        <Link className="nav-link fs-5" onClick={()=>this.usuarios()} to="/user"> Crear usuario </Link>
                     </li>
                 </ul>
             </div>
