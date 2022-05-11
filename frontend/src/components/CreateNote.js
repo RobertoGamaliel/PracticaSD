@@ -1,10 +1,19 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import DatePicker from 'react-datepicker'
+import React, { Component } from 'react';
+import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import { useParams } from "react-router-dom";
+
+
+
 import 'react-datepicker/dist/react-datepicker.css'
+function parametros(Component){
+    return props => <Component {...this.props} useParams={useParams()}/>;
+}
+
+const Parametros = parametros();
 
 export default class CreateNote extends Component {
-
+    
     state = {
         users: [],
         userSelected: '',
@@ -19,16 +28,22 @@ export default class CreateNote extends Component {
         error: ''
     }
 
+
+
+
     async componentDidMount() {
-        const res = await axios.get('http://localhost:4000/api/users');
+        
+        console.log("props CreateNote",Parametros.props);
+
+        const res = await axios.get('http://localhost:80/api/users');
         this.setState({
             users: res.data,
             userSelected: res.data[0].username,
             contrasena: res.data[0].contrasena
 
         })
-        /*if (this.props.params.id) {
-            const res = await axios.get('http://localhost:4000/api/notes/' + this.props.params.id);
+        /*if (this.props.match.params.id) {
+            const res = await axios.get('http://localhost:80/api/notes/' + this.props.params.id);
             this.setState({
                 title: res.data.title,
                 content: res.data.content,
@@ -75,9 +90,9 @@ export default class CreateNote extends Component {
                 author: this.state.userSelected,
             }//en caso de editar
             if (this.state.editing) {
-                await axios.put('http://localhost:4000/api/notes/' + this.state._id, newNote)
+                await axios.put('http://localhost:80/api/notes/' + this.state._id, newNote)
             } else {
-                await axios.post('http://localhost:4000/api/notes', newNote);
+                await axios.post('http://localhost:80/api/notes', newNote);
             }
             window.location.href = '/'; //Colocar en la pantalla inicial
             return true;
@@ -108,13 +123,13 @@ export default class CreateNote extends Component {
     }
 
     pantallaAlerta() {
-        if (this.state.error !== '')
+        if (this.state.contrasena !== '')
             return (
                 <div className='row pt-3 pb-3'>
                     <div className="col-md-3 "></div>
                     <div className="col-md-6 ">
                         <div className="alert alert-warning shadow text-center" role="alert">
-                            {this.state.errores}
+                            PARA AGREGAR NOTAS CON ESTE USUARIO DEBERA INTRODUCIRR SU CONTRASEÑA
                         </div>
                     </div>
                     <div className="col-md-3 "></div>
@@ -125,17 +140,18 @@ export default class CreateNote extends Component {
 
     render() {
         return (
-            <div className='row' >
-
-                <div className="col-md-8 offset-md-2 p-5">
+            <div className='row justify-content-md-center' >
+                
+                {this.pantallaAlerta()}
+                <div className="col-md-5 mt-5">
                     <div className="card card-body p-3" id='formularioNota'>
                         <h4 className='d-flex justify-content-center'>Agregar nota {this.state.contra}</h4>
                         <div className="dropdown-divider"></div>
 
                         <div className='row justify-content-center'>
-                            <div className="col-md-3  p-1"></div>
+                            <div className="col-md-1  p-1"></div>
 
-                            <div className="col-md-6 p-1">
+                            <div className="col-md-10 p-1">
                                 <form onSubmit={this.onSubmit}>
                                     <div className="form-group" >
                                         <select
@@ -197,7 +213,7 @@ export default class CreateNote extends Component {
                                 </form>
                             </div>
 
-                            <div className="col-md-3  p-1"></div>
+                            <div className="col-md-1  p-1"></div>
                         </div>
 
 

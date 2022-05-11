@@ -14,12 +14,13 @@ export default class CreateUser extends Component {
   }
 
   async componentDidMount() {
+    console.log("props CreateUser",this.props);
     this.getUsers();
   }
 
   getUsers = async () => {
     this.setState({ pantallaCarga: 'OBTENIENDO USUARIOS...' });
-    const res = await axios.get('http://localhost:4000/api/users');
+    const res = await axios.get('http://localhost:80/api/users');
     this.setState({ users: res.data, pantallaCarga: '' });
 
   }
@@ -90,7 +91,7 @@ export default class CreateUser extends Component {
 
     this.setState({ pantallaCarga: 'PUBLICANDO EL NUEVO USUARIO...' });
     e.preventDefault();
-    await axios.post('http://localhost:4000/api/users', {
+    await axios.post('http://localhost:80/api/users', {
       username: this.state.username,
       sexo: this.state.sexo,
       comentario: this.state.comentario,
@@ -108,7 +109,7 @@ export default class CreateUser extends Component {
     } else {
 
       this.setState({ pantallaCarga: 'UN MOMENTO, ELIMINANDO AL USUARIO...' });
-      await axios.delete('http://localhost:4000/api/users/' + id);
+      await axios.delete('http://localhost:80/api/users/' + id);
       this.setState({ pantallaCarga: '', errores: '', cs: '' });
       this.getUsers();
     }
@@ -165,7 +166,7 @@ export default class CreateUser extends Component {
     if (sexo === 3) {
       return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gender-trans" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1.707L3.5 2.793l.646-.647a.5.5 0 1 1 .708.708l-.647.646.822.822A3.99 3.99 0 0 1 8 3c1.18 0 2.239.51 2.971 1.322L14.293 1H11.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 0 1-3.05-5.814l-.95-.949-.646.647a.5.5 0 1 1-.708-.708l.647-.646L1 1.707V3.5a.5.5 0 0 1-1 0v-3zm5.49 4.856a3 3 0 1 0 5.02 3.288 3 3 0 0 0-5.02-3.288z" />
+          <path fillRule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1.707L3.5 2.793l.646-.647a.5.5 0 1 1 .708.708l-.647.646.822.822A3.99 3.99 0 0 1 8 3c1.18 0 2.239.51 2.971 1.322L14.293 1H11.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 0 1-3.05-5.814l-.95-.949-.646.647a.5.5 0 1 1-.708-.708l.647-.646L1 1.707V3.5a.5.5 0 0 1-1 0v-3zm5.49 4.856a3 3 0 1 0 5.02 3.288 3 3 0 0 0-5.02-3.288z" />
         </svg>
       )
     }
@@ -173,7 +174,7 @@ export default class CreateUser extends Component {
     else if (sexo === 2) {
       return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gender-female" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z" />
+          <path fillRule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z" />
         </svg>
       )
     }
@@ -181,7 +182,7 @@ export default class CreateUser extends Component {
     else {
       return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-gender-male" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+          <path fillRule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
         </svg>
       )
     }
@@ -194,7 +195,7 @@ export default class CreateUser extends Component {
       <div className="row">
         {this.pantallaCarga()}
         <div className="col-md-2 "></div>
-        <div className="col-md-4 p-5 mb-5">
+    <div className="col-md-4 p-5 mb-5">
           <div className="card card-body rounded shadow">
             <h3 className='text-dark text-center'>Nuevo usuario </h3>
 
@@ -248,7 +249,7 @@ export default class CreateUser extends Component {
                 </div>
               </div>
 
-              <button  className="btn btn-primary ms-5 mt-3" id='botonGuardar' onClick={()=>this.onSubmit}>
+              <button className="btn btn-primary ms-5 mt-3" id='botonGuardar' onClick={() => this.onSubmit}>
                 CREAR NUEVO USUARIO
               </button>
             </form>
@@ -257,7 +258,7 @@ export default class CreateUser extends Component {
         <div className="col-md-5 pt-5 mb-5">
 
           <ul className="list-group">
-            <p id='listaUsuarios' className='pt-1 pb-1 ms-3 me-3'> {this.state.pantallaCarga === "OBTENIENDO USUARIOS..." || this.state.pantallaCarga === "UN MOMENTO, ESTAMOS CREANDO EL NUEVO USUARIO..." ? "UN MOMENTO" : this.state.users.length > 0 ? 'USUARIOS REGISTRADOS' : 'SIN USUARIOS REGISTRADOS'}</p>
+            <p id='encabezadoUsuarios' className='pt-1 pb-1 ms-3 me-3 bg-dark'> {this.state.pantallaCarga === "OBTENIENDO USUARIOS..." || this.state.pantallaCarga === "UN MOMENTO, ESTAMOS CREANDO EL NUEVO USUARIO..." ? "UN MOMENTO" : this.state.users.length > 0 ? 'USUARIOS REGISTRADOS' : 'SIN USUARIOS REGISTRADOS'}</p>
             {
               this.state.users.map(user => {
 
