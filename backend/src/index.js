@@ -1,7 +1,10 @@
 require('dotenv').config();
 
 const app = require('./app');
-require('./database');  
+require('./database'); 
+
+const fbase = require("./FirebaseConnect");
+console.log("opciones de firebase: ",fbase.name);
 
 async function main() {
      await app.listen(app.get('port'));
